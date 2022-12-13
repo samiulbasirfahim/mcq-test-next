@@ -5,25 +5,18 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Center,
   Flex,
   Heading,
 } from "@chakra-ui/react"
+import { useRouter } from "next/router"
+import HeadingC from "../components/Heading"
 
 export default function Home() {
+  const router = useRouter()
   return (
     <Flex px="4" py="8" justify={"center"}>
       <Box>
-        <p
-          style={{
-            textAlign: "center",
-            fontSize: 25,
-            marginBottom: 30,
-            fontWeight: 900,
-          }}
-        >
-          Boost your Knowledge
-        </p>
+        <HeadingC>Boost your knowledge</HeadingC>
         <Card
           bg="gray.100"
           boxShadow="sm"
@@ -40,7 +33,11 @@ export default function Home() {
             </p>
           </CardBody>
           <CardFooter>
-            <Button bg="#317773" color="#fff">
+            <Button
+              onClick={(e) => router.push("/quez")}
+              bg="#317773"
+              color="#fff"
+            >
               Start
             </Button>
           </CardFooter>

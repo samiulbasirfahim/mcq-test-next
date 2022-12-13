@@ -20,7 +20,7 @@ export default function Navbar() {
   const { isOpen, onToggle } = useDisclosure()
 
   return (
-    <div>
+    <div style={{ marginBottom: !isOpen ? 80 : 0 }}>
       <Box width="full" position="fixed" bottom="0">
         <Center onClick={onToggle} py={2} bg="#317773">
           {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
