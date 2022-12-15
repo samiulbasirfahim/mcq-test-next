@@ -9,7 +9,7 @@ export default function Quez() {
     {
       question: "Who is the first programmer ?",
       options: [
-        "hello worlds1",
+        "f1",
         "hello worlds2",
         "hello worlds3",
         "hello worlds4",
