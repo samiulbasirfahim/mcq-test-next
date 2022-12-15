@@ -1,5 +1,12 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Button, useColorMode } from "@chakra-ui/react"
 
 export default function Settings() {
-  return <Box></Box>
+  const { colorMode, toggleColorMode } = useColorMode()
+  return (
+    <Box>
+      <Button onClick={toggleColorMode}>
+        Toggle {colorMode === "light" ? "Dark" : "Light"}
+      </Button>
+    </Box>
+  )
 }

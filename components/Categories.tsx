@@ -48,9 +48,9 @@ export default function Categories({ setCategory }: any) {
         {categories.map((category) => {
           return (
             <Card
+              key={category.id}
               onClick={() => setCategory(category.id)}
               maxW="sm"
-              bg="gray.100"
               boxShadow="sm"
               shadow="outline"
               align="center"

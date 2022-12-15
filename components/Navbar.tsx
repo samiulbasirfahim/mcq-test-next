@@ -22,11 +22,11 @@ export default function Navbar() {
   return (
     <div style={{ marginBottom: !isOpen ? 80 : 0 }}>
       <Box width="full" position="fixed" bottom="0">
-        <Center onClick={onToggle} py={2} bg="#317773">
+        <Center onClick={onToggle} py={2} bg="secondary">
           {isOpen ? <ArrowUpIcon /> : <ArrowDownIcon />}
         </Center>
         <Collapse in={!isOpen}>
-          <Flex px={8} py={4} bg="#317773">
+          <Flex px={8} py={4} bg="secondary">
             <Center>
               <Link href="/">
                 <Image

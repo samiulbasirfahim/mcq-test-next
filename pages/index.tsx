@@ -9,6 +9,7 @@ import {
   Heading,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
+import Buttonc from "../components/Button"
 import HeadingC from "../components/Heading"
 
 export default function Home() {
@@ -17,13 +18,7 @@ export default function Home() {
     <Flex px="4" py="8" justify={"center"}>
       <Box>
         <HeadingC>Boost your knowledge</HeadingC>
-        <Card
-          bg="gray.100"
-          boxShadow="sm"
-          shadow="outline"
-          align="center"
-          mb="16"
-        >
+        <Card boxShadow="sm" shadow="outline" align="center" mb="16"  >
           <CardHeader>
             <p style={{ fontSize: 24, fontWeight: 600 }}>Start quez test</p>
           </CardHeader>
@@ -33,16 +28,10 @@ export default function Home() {
             </p>
           </CardBody>
           <CardFooter>
-            <Button
-              onClick={(e) => router.push("/quez")}
-              bg="#317773"
-              color="#fff"
-            >
-              Start
-            </Button>
+            <Buttonc onClick={() => router.push("/quez")}>Start</Buttonc>
           </CardFooter>
         </Card>
-        <Card bg="gray.100" boxShadow="sm" shadow="outline" align="center">
+        <Card boxShadow="sm" shadow="outline" align="center">
           <CardHeader>
             <p style={{ fontSize: 24, fontWeight: 600 }}>Submit a quez</p>
           </CardHeader>
@@ -52,9 +41,7 @@ export default function Home() {
             </p>
           </CardBody>
           <CardFooter>
-            <Button bg="#317773" color="#fff">
-              Submit
-            </Button>
+            <Buttonc>Submit</Buttonc>
           </CardFooter>
         </Card>
       </Box>
