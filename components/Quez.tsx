@@ -20,7 +20,7 @@ export default function Quez({
   question,
   options,
   correct,
-  correctIndex,
+  correctAnswerIndex,
   checkAnswer,
   nextQuestion,
   questionIndex,
@@ -53,7 +53,7 @@ export default function Quez({
                 bg={
                   correct === undefined
                     ? "highlight"
-                    : correctIndex === index
+                    : correctAnswerIndex === index
                     ? "secondary"
                     : "danger"
                 }

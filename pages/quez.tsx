@@ -7,51 +7,46 @@ export default function Quez() {
   const [category, setCategory] = useState(null)
   const [question_set, setQuestion_Set] = useState([
     {
-      question: "Who is the first programmer ?",
-      options: [
-        "f1",
-        "hello worlds2",
-        "hello worlds3",
-        "hello worlds4",
-      ],
-      correctIndex: 2,
+      title: "Who is the first programmer ?",
+      options: ["f1", "hello worlds2", "hello worlds3", "hello worlds4"],
+      correctAnswerIndex: 2,
     },
     {
-      question: "World first computer name ?",
+      title: "World first computer name ?",
       options: [
         "hello worlds1",
         "hello worlds2",
         "hello worlds3",
         "hello worlds4",
       ],
-      correctIndex: 1,
+      correctAnswerIndex: 1,
     },
     {
-      question: "Who is the inventor of computer ?",
+      title: "Who is the inventor of computer ?",
       options: [
         "hello worlds1",
         "hello worlds2",
         "hello worlds3",
         "hello worlds4",
       ],
-      correctIndex: 3,
+      correctAnswerIndex: 3,
     },
     {
-      question: "What is the scientific name of human ?",
+      title: "What is the scientific name of human ?",
       options: [
         "hello worlds1",
         "hello worlds2",
         "hello worlds3",
         "hello worlds4",
       ],
-      correctIndex: 0,
+      correctAnswerIndex: 0,
     },
   ])
   const [correct, setCorrect] = useState<boolean | undefined>(undefined)
-  const [correctIndex, setCorrectIndex] = useState<number>(2)
+  const [correctAnswerIndex, setcorrectAnswerIndex] = useState<number>(2)
   const [questionIndex, setQuestionIndex] = useState<number>(0)
-  const [question, setQuestion] = useState<string | number | undefined>(
-    question_set[0].question
+  const [title, setTitle] = useState<string | number | undefined>(
+    question_set[0].title
   )
 
   const [totalCorrect, setTotalCorrect] = useState<number>(0)
@@ -62,7 +57,7 @@ export default function Quez() {
   )
 
   function checkAnswer(index: number) {
-    if (index === correctIndex) {
+    if (index === correctAnswerIndex) {
       setTotalCorrect(totalCorrect + 1)
       setCorrect(true)
     } else {
@@ -76,13 +71,13 @@ export default function Quez() {
       const newQuestion = {
         questionIndex: newQuestionIndex,
         options: question_set[newQuestionIndex].options,
-        question: question_set[newQuestionIndex].question,
-        correctIndex: question_set[newQuestionIndex].correctIndex,
+        question: question_set[newQuestionIndex].title,
+        correctAnswerIndex: question_set[newQuestionIndex].correctAnswerIndex,
       }
 
       setOptions(newQuestion.options)
-      setQuestion(newQuestion.question)
-      setCorrectIndex(newQuestion.correctIndex)
+      setTitle(newQuestion.question)
+      setcorrectAnswerIndex(newQuestion.correctAnswerIndex)
       setQuestionIndex(newQuestion.questionIndex)
       setCorrect(undefined)
       setProgress((newQuestionIndex / question_set.length) * 100)
@@ -103,10 +98,10 @@ export default function Quez() {
         </Center>
       </Box>
       <Quez_component
-        question={question}
+        question={title}
         options={options}
         correct={correct}
-        correctIndex={correctIndex}
+        correctAnswerIndex={correctAnswerIndex}
         checkAnswer={checkAnswer}
         nextQuestion={nextQuestion}
         questionIndex={questionIndex}
