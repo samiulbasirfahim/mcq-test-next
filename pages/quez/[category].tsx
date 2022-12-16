@@ -83,7 +83,7 @@ export async function getServerSideProps({ params }: any) {
   const category = params.category
 
   const response = await fetch(
-    "http://localhost:3000/api/question/get?category=" + category,
+    "https://mcq-test-next-git-main-fahimekermall.vercel.app/api/question/get?category=" + category,
     {
       method: "GET",
     }
