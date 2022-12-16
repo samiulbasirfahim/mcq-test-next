@@ -123,7 +123,7 @@ export default function Submit({ response: categories }: any) {
         <FormLabel>Country</FormLabel>
         <Select placeholder="Select category" name="category" required={true}>
           {categories.map((category: any) => {
-            return <option>{category.title}</option>
+            return <option key={category.title}>{category.title}</option>
           })}
         </Select>
         <Input mt={5} bg="primary" type={"submit"} title="submit" />
