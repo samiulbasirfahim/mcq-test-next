@@ -1,43 +1,26 @@
 import { Card, CardBody, Stack, Image, Grid, Box } from "@chakra-ui/react"
-import HeadingC from "./Heading"
+import { useRouter } from "next/router"
+import HeadingC from "../../components/Heading"
 
-export default function Categories({ setCategory }: any) {
+export default function Categories() {
+  const router = useRouter()
+
+  const setCategory = (name: string) => {
+    router.push("/quez/" + name)
+  }
+
   const categories = [
     {
       id: 1,
-      name: "Science",
+      title: "science",
       imageLink:
         "https://img.freepik.com/free-vector/flat-science-illustration-biotechnology-concept_23-2148891611.jpg?w=740&t=st=1670937648~exp=1670938248~hmac=9b891916434d36205b40e8c06dd3069c2b2cfaf59390902aeebec2d9bb47f40d",
     },
     {
       id: 2,
-      name: "Science",
+      title: "english",
       imageLink:
         "https://img.freepik.com/free-vector/flat-science-illustration-biotechnology-concept_23-2148891611.jpg?w=740&t=st=1670937648~exp=1670938248~hmac=9b891916434d36205b40e8c06dd3069c2b2cfaf59390902aeebec2d9bb47f40d",
-    },
-    {
-      id: 1,
-      name: "Science",
-      imageLink:
-        "https://img.freepik.com/free-vector/flat-science-illustration-biotechnology-concept_23-2148891611.jpg?w=740&t=st=1670937648~exp=1670938248~hmac=9b891916434d36205b40e8c06dd3069c2b2cfaf59390902aeebec2d9bb47f40d",
-    },
-    {
-      id: 1,
-      name: "Science",
-      imageLink:
-        "https://img.freepik.com/free-vector/flat-science-illustration-biotechnology-concept_23-2148891611.jpg?w=740&t=st=1670937648~exp=1670938248~hmac=9b891916434d36205b40e8c06dd3069c2b2cfaf59390902aeebec2d9bb47f40d",
-    },
-    {
-      id: 1,
-      name: "Science",
-      imageLink:
-        "https://img.freepik.com/free-vector/flat-science-illustration-biotechnology-concept_23-2148891611.jpg?w=740&t=st=1670937648~exp=1670938248~hmac=9b891916434d36205b40e8c06dd3069c2b2cfaf59390902aeebec2d9bb47f40d",
-    },
-    {
-      id: 2,
-      name: "English",
-      imageLink:
-        "https://img.freepik.com/free-vector/education-pattern-background-doodle-style_53876-115365.jpg?w=740&t=st=1670937877~exp=1670938477~hmac=74f532fa76b90a8952b421e073076445ddb4047f6ac9bd3e8131fee52d799666",
     },
   ]
 
@@ -49,7 +32,7 @@ export default function Categories({ setCategory }: any) {
           return (
             <Card
               key={category.id}
-              onClick={() => setCategory(category.id)}
+              onClick={() => setCategory(category.title)}
               maxW="sm"
               boxShadow="sm"
               shadow="outline"
@@ -70,7 +53,7 @@ export default function Categories({ setCategory }: any) {
                       textAlign: "center",
                     }}
                   >
-                    {category.name}
+                    {category.title}
                   </p>
                 </Stack>
               </CardBody>

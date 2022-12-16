@@ -18,7 +18,7 @@ export default function Home() {
     <Flex px="4" py="8" justify={"center"}>
       <Box>
         <HeadingC>Boost your knowledge</HeadingC>
-        <Card boxShadow="sm" shadow="outline" align="center" mb="16"  >
+        <Card boxShadow="sm" shadow="outline" align="center" mb="16">
           <CardHeader>
             <p style={{ fontSize: 24, fontWeight: 600 }}>Start quez test</p>
           </CardHeader>

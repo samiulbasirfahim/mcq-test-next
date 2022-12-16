@@ -25,6 +25,14 @@ export default function Quez({
   nextQuestion,
   questionIndex,
 }: any) {
+  console.table({
+    question,
+    options,
+    correct,
+    correctAnswerIndex,
+    questionIndex,
+  })
+
   return (
     <Box px="4" py="8">
       <Grid templateColumns="repeat(1, 1fr)" gap={4}>
@@ -34,39 +42,40 @@ export default function Quez({
             <Text>{question}</Text>
           </CardBody>
         </Card>
-        {options.map(
-          (
-            option:
-              | string
-              | number
-              | boolean
-              | ReactElement<any, string | JSXElementConstructor<any>>
-              | ReactFragment
-              | ReactPortal
-              | null
-              | undefined,
-            index: Key | null | undefined
-          ) => {
-            return (
-              <Card
-                onClick={() => checkAnswer(index)}
-                bg={
-                  correct === undefined
-                    ? "highlight"
-                    : correctAnswerIndex === index
-                    ? "secondary"
-                    : "danger"
-                }
-                cursor="pointer"
-                key={index}
-              >
-                <CardBody>
-                  <Text>{option}</Text>
-                </CardBody>
-              </Card>
-            )
-          }
-        )}
+        {options?.length > 0 &&
+          options.map(
+            (
+              option:
+                | string
+                | number
+                | boolean
+                | ReactElement<any, string | JSXElementConstructor<any>>
+                | ReactFragment
+                | ReactPortal
+                | null
+                | undefined,
+              index: Key | null | undefined
+            ) => {
+              return (
+                <Card
+                  onClick={() => checkAnswer(index)}
+                  bg={
+                    correct === undefined
+                      ? "highlight"
+                      : correctAnswerIndex === index
+                      ? "secondary"
+                      : "danger"
+                  }
+                  cursor="pointer"
+                  key={index}
+                >
+                  <CardBody>
+                    <Text>{option}</Text>
+                  </CardBody>
+                </Card>
+              )
+            }
+          )}
       </Grid>
 
       {correct !== undefined && (
