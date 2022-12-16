@@ -41,7 +41,7 @@ export default function Home() {
             </p>
           </CardBody>
           <CardFooter>
-            <Buttonc>Submit</Buttonc>
+            <Buttonc onClick={()=>router.push("/submit")}>Submit</Buttonc>
           </CardFooter>
         </Card>
       </Box>
