@@ -146,7 +146,7 @@ export default function Submit() {
             return <option key={category.title}>{category.title}</option>
           })}
         </Select>
-        <Input mt={5} bg="primary" type={"submit"} title="submit" />
+        <Input mt="5" bg="primary" type="submit" value="Submit" />
       </form>
     </Flex>
   )

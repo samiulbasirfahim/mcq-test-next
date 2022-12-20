@@ -8,7 +8,8 @@ const questionSchema = new mongoose.Schema({
     addedBy: { type: mongoose.SchemaTypes.ObjectId },
     condition: {
         type: String,
-        enum: ["pending", "approved"]
+        enum: ["pending", "approved"],
+        default: "pending"
     }
 })
 

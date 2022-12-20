@@ -1,0 +1,111 @@
+import { InfoIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import {
+  Alert,
+  AlertIcon,
+  Box,
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  InputRightAddon,
+  Stack,
+} from "@chakra-ui/react"
+import Head from "next/head"
+import { useRouter } from "next/router"
+import { useState } from "react"
+import HeadingC from "../components/Heading"
+import apiRoutes from "../utilities/apiRoutes"
+
+export default function Login() {
+  const [showPass, setShowPass] = useState(false)
+  const [error, setError] = useState("")
+  const router = useRouter()
+  function showPassFunc() {
+    setShowPass(!showPass)
+  }
+
+  function handleLogin(e: any) {
+    e.preventDefault()
+    const loginInfo = {
+      email: e.target.email.value,
+      password: e.target.password.value,
+    }
+    if (loginInfo.email && loginInfo.password) {
+      fetch(apiRoutes.loginUser, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loginInfo),
+      })
+        .then((res) => res.json())
+        .then((data: any) => {
+          if (!data.status) {
+            if (data.message) {
+              setError(data.message)
+            }
+          } else if (data.status) {
+            const stringifyUser = JSON.stringify(data.user)
+            localStorage.setItem("user", stringifyUser)
+            router.push("/")
+          }
+        })
+    }
+  }
+
+  return (
+    <Flex
+      px="4"
+      py="8"
+      flexDir="column"
+      justifyContent="center"
+      alignItems="center"
+      height="100vh"
+    >
+      <Head>
+        <title>Login</title>
+      </Head>
+      <HeadingC>Login here</HeadingC>
+      <form onSubmit={handleLogin}>
+        <Stack spacing={4}>
+          <InputGroup size="sm">
+            <InputLeftAddon children="email" />
+            <Input
+              type="email"
+              placeholder="email"
+              name="email"
+              required={true}
+            />
+          </InputGroup>
+          <InputGroup size="sm">
+            <InputLeftAddon children="password" />
+            <Input
+              type={!showPass ? "password" : "text"}
+              placeholder="password"
+              name="password"
+              required={true}
+            />
+            <InputRightAddon
+              onClick={showPassFunc}
+              cursor="pointer"
+              children={!showPass ? <ViewIcon /> : <ViewOffIcon />}
+            />
+          </InputGroup>
+          {error && (
+            <Alert size="sm" py="2" rounded="sm" status="error">
+              <AlertIcon />
+              {error}
+            </Alert>
+          )}
+          <Input
+            size="sm"
+            rounded="sm"
+            type="submit"
+            cursor="pointer"
+            value="Login"
+          />
+        </Stack>
+      </form>
+    </Flex>
+  )
+}

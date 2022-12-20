@@ -6,7 +6,8 @@ import randomNumber from "../../../utilities/randomNumber"
 export default async function get(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()
     const category = req?.query?.category
-    Question.count({ category: category }, async function (err, count: number) {
+    const condition = req?.query?.condition
+    Question.count({ category: category, condition: condition }, async function (err, count: number) {
         if (!err) {
             if (count > 0) {
                 let questionIndex = []
@@ -15,7 +16,8 @@ export default async function get(req: NextApiRequest, res: NextApiResponse) {
                     const number = randomNumber(count)
                     if (questionIndex.indexOf(number) === -1) {
                         questionIndex.push(number)
-                        const question = await Question.find({ category: category }).skip(number as number).limit(1)
+                        console.log(number)
+                        const question = await Question.find({ category: category, condition: condition }).skip(number as number).limit(1)
                         questions.push(question[0])
                     } else {
                         continue

@@ -56,7 +56,7 @@ export default function Quez() {
   }
 
   useEffect(() => {
-    const uri = `${apiRoutes.getQuestion}?category=${category}`
+    const uri = `${apiRoutes.getQuestion}?category=${category}&condition=approved`
     if (category) {
       fetch(uri)
         .then((response) => response.json())
