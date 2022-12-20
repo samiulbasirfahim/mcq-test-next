@@ -1,10 +1,10 @@
 import { Card, CardBody, Stack, Image, Grid, Box } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 import HeadingC from "../../components/Heading"
+import apiRoutes from "../../utilities/apiRoutes"
 
 export default function Categories({ response: categories }: any) {
   const router = useRouter()
-  console.log(categories)
   const setCategory = (name: string) => {
     router.push("/quez/" + name)
   }
@@ -50,7 +50,7 @@ export default function Categories({ response: categories }: any) {
   )
 }
 export async function getServerSideProps() {
-  const response = await fetch("https://mcq-test-next-git-main-fahimekermall.vercel.app/api/category/get", {
+  const response = await fetch(apiRoutes.getCategory, {
     method: "GET",
   }).then((response) => response.json())
 

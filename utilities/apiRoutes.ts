@@ -1,7 +1,6 @@
+const baseApi = process.env.enviroment === "dev" ? "http://localhost:3000/api" : "https://mcq-test-next-bdt61rj92-fahimekermall.vercel.app/api"
+const getCategory = baseApi + "/category/get"
+const createQuestion = baseApi + "/question/create"
+const getQuestion = baseApi + "/question/get"
 
-export let api: any = {}
-
-const hostname = "http://localhost:3000"
-api.getQuestion = hostname + "/api/question/get"
-api.createQuestion = hostname + "/api/question/create"
-api.getCategories = hostname + "/api/category/get"
+export default { getCategory, getQuestion, createQuestion }

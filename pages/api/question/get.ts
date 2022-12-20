@@ -5,7 +5,6 @@ import randomNumber from "../../../utilities/randomNumber"
 
 export default async function get(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()
-    // console.log(req.headers.secret)
     const category = req?.query?.category
     Question.count({ category: category }, async function (err, count: number) {
         if (!err) {

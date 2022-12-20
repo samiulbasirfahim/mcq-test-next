@@ -13,6 +13,7 @@ import {
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 import { useState } from "react"
+import apiRoutes from "../utilities/apiRoutes"
 
 export default function Submit({ response: categories }: any) {
   const [value, setValue] = useState("")
@@ -52,7 +53,7 @@ export default function Submit({ response: categories }: any) {
 
       console.table(finalQuestion)
 
-      fetch("https://mcq-test-next-git-main-fahimekermall.vercel.app/api/question/create", {
+      fetch(apiRoutes.createQuestion, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -133,7 +134,7 @@ export default function Submit({ response: categories }: any) {
 }
 
 export async function getServerSideProps() {
-  const response = await fetch("https://mcq-test-next-git-main-fahimekermall.vercel.app/api/category/get", {
+  const response = await fetch(apiRoutes.getCategory, {
     method: "GET",
   }).then((response) => response.json())
   return {

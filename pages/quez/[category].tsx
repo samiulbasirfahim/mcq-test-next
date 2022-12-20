@@ -1,6 +1,8 @@
 import { Box, Center, Progress } from "@chakra-ui/react"
+import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Quez_component from "../../components/Quez"
+import apiRoutes from "../../utilities/apiRoutes"
 
 export default function Quez({ response: question_set }: any) {
   const [correct, setCorrect] = useState<boolean | undefined>(undefined)
@@ -11,14 +13,13 @@ export default function Quez({ response: question_set }: any) {
   const [title, setTitle] = useState<string | number | undefined>(
     question_set[0].title
   )
-
   const [totalCorrect, setTotalCorrect] = useState<number>(0)
   const [progress, setProgress] = useState<number>(0)
 
   const [options, setOptions] = useState<[string] | undefined | any>(
     question_set[0].options
   )
-
+  const router = useRouter()
   function checkAnswer(index: number) {
     if (index === correctAnswerIndex) {
       setTotalCorrect(totalCorrect + 1)
@@ -43,13 +44,14 @@ export default function Quez({ response: question_set }: any) {
       setQuestionIndex(newQuestion.questionIndex)
       setCorrect(undefined)
       setProgress((newQuestionIndex / question_set.length) * 100)
+    } else {
+      router.push("/result")
     }
   }
 
   useEffect(() => {
     setTitle(question_set[0].title)
     setOptions(question_set[0].options)
-    console.log(question_set)
     setcorrectAnswerIndex(question_set[0].correctAnswerIndex)
   }, [question_set])
 
@@ -81,13 +83,10 @@ export default function Quez({ response: question_set }: any) {
 
 export async function getServerSideProps({ params }: any) {
   const category = params.category
-
-  const response = await fetch(
-    "https://mcq-test-next-git-main-fahimekermall.vercel.app/api/question/get?category=" + category,
-    {
-      method: "GET",
-    }
-  ).then((response) => response.json())
+  const uri = `${apiRoutes.getQuestion}?category=${category}`
+  const response = await fetch(uri, {
+    method: "GET",
+  }).then((response) => response.json())
 
   return {
     props: {
