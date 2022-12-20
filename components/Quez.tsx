@@ -25,14 +25,6 @@ export default function Quez({
   nextQuestion,
   questionIndex,
 }: any) {
-  console.table({
-    question,
-    options,
-    correct,
-    correctAnswerIndex,
-    questionIndex,
-  })
-
   return (
     <Box px="4" py="8">
       <Grid templateColumns="repeat(1, 1fr)" gap={4}>

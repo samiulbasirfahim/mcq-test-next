@@ -11,6 +11,7 @@ import {
   Select,
   Stack,
 } from "@chakra-ui/react"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import apiRoutes from "../utilities/apiRoutes"
@@ -67,6 +68,9 @@ export default function Submit({ response: categories }: any) {
 
   return (
     <Flex px="4" py="8" justify={"center"}>
+      <Head>
+        <title>Submit quez</title>
+      </Head>
       <form onSubmit={handleSubmit}>
         <FormLabel>Title</FormLabel>
         <Input

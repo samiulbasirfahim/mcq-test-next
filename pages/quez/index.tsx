@@ -1,4 +1,5 @@
 import { Card, CardBody, Stack, Image, Grid, Box } from "@chakra-ui/react"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import HeadingC from "../../components/Heading"
 import apiRoutes from "../../utilities/apiRoutes"
@@ -11,6 +12,7 @@ export default function Categories({ response: categories }: any) {
 
   return (
     <Box px="4" py={8}>
+      <Head><title>Choose category</title></Head>
       <HeadingC>Choose category</HeadingC>
       <Grid templateColumns="repeat(2, 1fr)" gap="5">
         {categories.map((category: any) => {

@@ -8,6 +8,7 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import Buttonc from "../components/Button"
 import HeadingC from "../components/Heading"
@@ -16,6 +17,9 @@ export default function Home() {
   const router = useRouter()
   return (
     <Flex px="4" py="8" justify={"center"}>
+      <Head>
+        <title>Quez</title>
+      </Head>
       <Box>
         <HeadingC>Boost your knowledge</HeadingC>
         <Card boxShadow="sm" shadow="outline" align="center" mb="16">
@@ -41,7 +45,7 @@ export default function Home() {
             </p>
           </CardBody>
           <CardFooter>
-            <Buttonc onClick={()=>router.push("/submit")}>Submit</Buttonc>
+            <Buttonc onClick={() => router.push("/submit")}>Submit</Buttonc>
           </CardFooter>
         </Card>
       </Box>

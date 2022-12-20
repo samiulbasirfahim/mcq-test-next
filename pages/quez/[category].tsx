@@ -1,4 +1,5 @@
 import { Box, Center, Progress } from "@chakra-ui/react"
+import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Quez_component from "../../components/Quez"
@@ -20,6 +21,7 @@ export default function Quez({ response: question_set }: any) {
     question_set[0].options
   )
   const router = useRouter()
+  const category = router.query.category
   function checkAnswer(index: number) {
     if (index === correctAnswerIndex) {
       setTotalCorrect(totalCorrect + 1)
@@ -45,7 +47,14 @@ export default function Quez({ response: question_set }: any) {
       setCorrect(undefined)
       setProgress((newQuestionIndex / question_set.length) * 100)
     } else {
-      router.push("/result")
+      router.push({
+        pathname: "/result",
+        query: {
+          category: category,
+          totalCorrect: totalCorrect,
+          totalQuestion: question_set.length,
+        },
+      })
     }
   }
 
@@ -57,9 +66,12 @@ export default function Quez({ response: question_set }: any) {
 
   return (
     <Box>
+      <Head>
+        <title>Quez of {category}</title>
+      </Head>
       <Box bg="primary" p={4} borderRadius="md">
         <Center mb={2} fontSize={18} fontWeight={600}>
-          Category:
+          Category: {category}
         </Center>
         <Progress hasStripe value={progress} />
         <Center mt={2} bg="warning" borderRadius="md">
