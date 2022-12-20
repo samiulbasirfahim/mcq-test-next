@@ -6,7 +6,6 @@ import {
   CardFooter,
   CardHeader,
   Flex,
-  Heading,
 } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
