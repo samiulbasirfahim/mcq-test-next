@@ -81,7 +81,7 @@ export default function Register() {
       <form onSubmit={handleRegister}>
         <Stack spacing={4}>
           <InputGroup size="sm">
-            <InputLeftAddon children="name" />
+            <InputLeftAddon>name</InputLeftAddon>
             <Input
               onChange={removeError}
               type="text"
@@ -91,7 +91,7 @@ export default function Register() {
             />
           </InputGroup>
           <InputGroup size="sm">
-            <InputLeftAddon children="email" />
+            <InputLeftAddon>email</InputLeftAddon>
             <Input
               onChange={removeError}
               type="email"
@@ -101,7 +101,7 @@ export default function Register() {
             />
           </InputGroup>
           <InputGroup size="sm">
-            <InputLeftAddon children="password" />
+            <InputLeftAddon>password</InputLeftAddon>
             <Input
               type={!showPass ? "password" : "text"}
               onChange={removeError}
@@ -110,14 +110,12 @@ export default function Register() {
               name="password"
               required={true}
             />
-            <InputRightAddon
-              onClick={showPassFunc}
-              cursor="pointer"
-              children={!showPass ? <ViewIcon /> : <ViewOffIcon />}
-            />
+            <InputRightAddon onClick={showPassFunc} cursor="pointer">
+              {!showPass ? <ViewIcon /> : <ViewOffIcon />}
+            </InputRightAddon>
           </InputGroup>
           <InputGroup size="sm">
-            <InputLeftAddon children="Conf pass" />
+            <InputLeftAddon>Conf pass</InputLeftAddon>
             <Input
               type={!showPass ? "password" : "text"}
               onChange={removeError}
@@ -125,11 +123,9 @@ export default function Register() {
               name="confirm_password"
               required={true}
             />
-            <InputRightAddon
-              onClick={showPassFunc}
-              cursor="pointer"
-              children={!showPass ? <ViewIcon /> : <ViewOffIcon />}
-            />
+            <InputRightAddon onClick={showPassFunc} cursor="pointer">
+              {!showPass ? <ViewIcon /> : <ViewOffIcon />}
+            </InputRightAddon>
           </InputGroup>
           {error && (
             <Alert size="sm" py="2" rounded="sm" status="error">

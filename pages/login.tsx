@@ -69,7 +69,7 @@ export default function Login() {
       <form onSubmit={handleLogin}>
         <Stack spacing={4}>
           <InputGroup size="sm">
-            <InputLeftAddon children="email" />
+            <InputLeftAddon>email</InputLeftAddon>
             <Input
               type="email"
               placeholder="email"
@@ -78,18 +78,16 @@ export default function Login() {
             />
           </InputGroup>
           <InputGroup size="sm">
-            <InputLeftAddon children="password" />
+            <InputLeftAddon>password</InputLeftAddon>
             <Input
               type={!showPass ? "password" : "text"}
               placeholder="password"
               name="password"
               required={true}
             />
-            <InputRightAddon
-              onClick={showPassFunc}
-              cursor="pointer"
-              children={!showPass ? <ViewIcon /> : <ViewOffIcon />}
-            />
+            <InputRightAddon onClick={showPassFunc} cursor="pointer">
+              {!showPass ? <ViewIcon /> : <ViewOffIcon />}
+            </InputRightAddon>
           </InputGroup>
           {error && (
             <Alert size="sm" py="2" rounded="sm" status="error">
