@@ -2,26 +2,23 @@ import { Box, Center, Progress } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
+import Loading from "../../components/Loading"
 import Quez_component from "../../components/Quez"
 import apiRoutes from "../../utilities/apiRoutes"
 
-export default function Quez({ response: question_set }: any) {
+export default function Quez() {
+  const [question_set, setQUestion_set] = useState<any>()
   const [correct, setCorrect] = useState<boolean | undefined>(undefined)
-  const [correctAnswerIndex, setcorrectAnswerIndex] = useState<number>(
-    question_set[0].correctAnswerIndex
-  )
+  const [correctAnswerIndex, setcorrectAnswerIndex] = useState<number>()
   const [questionIndex, setQuestionIndex] = useState<number>(0)
-  const [title, setTitle] = useState<string | number | undefined>(
-    question_set[0].title
-  )
+  const [title, setTitle] = useState<string | number | undefined>()
   const [totalCorrect, setTotalCorrect] = useState<number>(0)
   const [progress, setProgress] = useState<number>(0)
-
-  const [options, setOptions] = useState<[string] | undefined | any>(
-    question_set[0].options
-  )
+  const [options, setOptions] = useState<[string] | undefined | any>()
   const router = useRouter()
   const category = router.query.category
+  const [isLoading, setIsloading] = useState(true)
+
   function checkAnswer(index: number) {
     if (index === correctAnswerIndex) {
       setTotalCorrect(totalCorrect + 1)
@@ -59,12 +56,24 @@ export default function Quez({ response: question_set }: any) {
   }
 
   useEffect(() => {
-    setTitle(question_set[0].title)
-    setOptions(question_set[0].options)
-    setcorrectAnswerIndex(question_set[0].correctAnswerIndex)
-  }, [question_set])
+    const uri = `${apiRoutes.getQuestion}?category=${category}`
+    if (category) {
+      fetch(uri)
+        .then((response) => response.json())
+        .then((data) => {
+          setQUestion_set(data)
+          console.table(data)
+          setTitle(data[0].title)
+          setOptions(data[0].options)
+          setcorrectAnswerIndex(data[0].correctAnswerIndex)
+          setIsloading(false)
+        })
+    }
+  }, [category])
 
-  return (
+  return isLoading === true ? (
+    <Loading />
+  ) : (
     <Box>
       <Head>
         <title>Quez of {category}</title>
@@ -75,10 +84,10 @@ export default function Quez({ response: question_set }: any) {
         </Center>
         <Progress hasStripe value={progress} />
         <Center mt={2} bg="warning" borderRadius="md">
-          Correct answer {totalCorrect}/{question_set.length}
+          Correct answer {totalCorrect}/{question_set?.length}
         </Center>
       </Box>
-      {question_set.length > 0 && (
+      {question_set?.length > 0 && (
         <Quez_component
           question={title}
           options={options}
@@ -91,18 +100,4 @@ export default function Quez({ response: question_set }: any) {
       )}
     </Box>
   )
-}
-
-export async function getServerSideProps({ params }: any) {
-  const category = params.category
-  const uri = `${apiRoutes.getQuestion}?category=${category}`
-  const response = await fetch(uri, {
-    method: "GET",
-  }).then((response) => response.json())
-
-  return {
-    props: {
-      response,
-    },
-  }
 }

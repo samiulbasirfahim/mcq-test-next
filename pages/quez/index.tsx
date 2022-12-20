@@ -1,18 +1,38 @@
 import { Card, CardBody, Stack, Image, Grid, Box } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
+import { useEffect, useState } from "react"
 import HeadingC from "../../components/Heading"
+import Loading from "../../components/Loading"
 import apiRoutes from "../../utilities/apiRoutes"
 
-export default function Categories({ response: categories }: any) {
+export default function Categories() {
   const router = useRouter()
+  const [categories, setCategories] = useState<any>()
+  const [isLoading, setIsloading] = useState(true)
+
   const setCategory = (name: string) => {
     router.push("/quez/" + name)
   }
 
-  return (
+  useEffect(() => {
+    fetch(apiRoutes.getCategory, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data)
+        setIsloading(false)
+      })
+  }, [])
+
+  return isLoading === true ? (
+    <Loading />
+  ) : (
     <Box px="4" py={8}>
-      <Head><title>Choose category</title></Head>
+      <Head>
+        <title>Choose category</title>
+      </Head>
       <HeadingC>Choose category</HeadingC>
       <Grid templateColumns="repeat(2, 1fr)" gap="5">
         {categories.map((category: any) => {
@@ -50,15 +70,4 @@ export default function Categories({ response: categories }: any) {
       </Grid>
     </Box>
   )
-}
-export async function getServerSideProps() {
-  const response = await fetch(apiRoutes.getCategory, {
-    method: "GET",
-  }).then((response) => response.json())
-
-  return {
-    props: {
-      response,
-    },
-  }
 }

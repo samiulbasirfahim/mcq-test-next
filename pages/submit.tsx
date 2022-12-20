@@ -13,12 +13,16 @@ import {
 } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import Loading from "../components/Loading"
 import apiRoutes from "../utilities/apiRoutes"
 
-export default function Submit({ response: categories }: any) {
+export default function Submit() {
   const [value, setValue] = useState("")
   const router = useRouter()
+  const [categories, setCategories] = useState<any>()
+  const [isLoading, setIsloading] = useState(true)
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
@@ -66,7 +70,20 @@ export default function Submit({ response: categories }: any) {
     }
   }
 
-  return (
+  useEffect(() => {
+    fetch(apiRoutes.getCategory, {
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data)
+        setIsloading(false)
+      })
+  }, [])
+
+  return isLoading === true ? (
+    <Loading />
+  ) : (
     <Flex px="4" py="8" justify={"center"}>
       <Head>
         <title>Submit quez</title>
@@ -135,15 +152,4 @@ export default function Submit({ response: categories }: any) {
       </form>
     </Flex>
   )
-}
-
-export async function getServerSideProps() {
-  const response = await fetch(apiRoutes.getCategory, {
-    method: "GET",
-  }).then((response) => response.json())
-  return {
-    props: {
-      response,
-    },
-  }
 }
