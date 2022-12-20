@@ -4,9 +4,9 @@ export default function Loading() {
   return (
     <Container className="loading_div">
       <div className="loading">
-        <div className="circle cyan"></div>
-        <div className="circle magenta"></div>
-        <div className="circle yellow"></div>
+        <div className="circle first"></div>
+        <div className="circle second"></div>
+        <div className="circle third"></div>
         <p className="text-p">Loading...</p>
       </div>
     </Container>

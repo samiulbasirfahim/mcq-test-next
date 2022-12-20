@@ -1,20 +1,16 @@
 import {
   Alert,
   AlertIcon,
-  Box,
   Button,
   Card,
-  CardBody,
   CardFooter,
   CardHeader,
   Center,
   Flex,
-  Heading,
   Text,
 } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import HeadingC from "../components/Heading"
 
 export default function Result() {
   const router = useRouter()
@@ -46,8 +42,18 @@ export default function Result() {
           </Center>
           <Text>You have just complete a quez test</Text>
         </CardHeader>
-        <Flex>
-          <Center px="2">
+        <Flex flexDirection={"column"} px="2">
+          <Center flexDir={"column"}>
+            <Alert mb={5} rounded="xl" display="flex" flexDirection="column">
+              <Text color="secondary" py="0">
+                Total: {totalQuestion}{" "}
+              </Text>
+              <Text color="secondary" py="0">
+                Correct: {totalQuestion}{" "}
+              </Text>
+            </Alert>
+          </Center>
+          <Center>
             {percentage >= 80 && (
               <Alert rounded="xl" status="success">
                 <AlertIcon />

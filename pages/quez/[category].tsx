@@ -15,9 +15,9 @@ export default function Quez() {
   const [totalCorrect, setTotalCorrect] = useState<number>(0)
   const [progress, setProgress] = useState<number>(0)
   const [options, setOptions] = useState<[string] | undefined | any>()
+  const [isLoading, setIsloading] = useState(true)
   const router = useRouter()
   const category = router.query.category
-  const [isLoading, setIsloading] = useState(true)
 
   function checkAnswer(index: number) {
     if (index === correctAnswerIndex) {
