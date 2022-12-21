@@ -9,8 +9,10 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Stack,
+  Text,
 } from "@chakra-ui/react"
 import Head from "next/head"
+import { useRouter } from "next/router"
 import { useState } from "react"
 import HeadingC from "../components/Heading"
 import apiRoutes from "../utilities/apiRoutes"
@@ -18,6 +20,7 @@ import apiRoutes from "../utilities/apiRoutes"
 export default function Register() {
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState("")
+  const router = useRouter()
   function removeError() {
     setError("")
   }
@@ -57,6 +60,7 @@ export default function Register() {
           }
           if (!data?.code) {
             localStorage.setItem("user", JSON.stringify(data))
+            router.push("/")
           }
         })
     }
@@ -142,6 +146,9 @@ export default function Register() {
           />
         </Stack>
       </form>
+      <Text cursor="pointer" mt="5" onClick={() => router.push("/login")}>
+        Already have an account?
+      </Text>
     </Flex>
   )
 }

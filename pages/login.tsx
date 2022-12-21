@@ -9,6 +9,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
   Stack,
+  Text,
 } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
@@ -104,6 +105,9 @@ export default function Login() {
           />
         </Stack>
       </form>
+      <Text cursor="pointer" mt="5" onClick={() => router.push("/register")}>
+        Create an account?
+      </Text>
     </Flex>
   )
 }

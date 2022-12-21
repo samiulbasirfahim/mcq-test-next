@@ -7,6 +7,7 @@ import {
   useDisclosure,
   Button,
   Container,
+  Box,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 
@@ -18,6 +19,9 @@ export default function Navbar() {
 
   const router = useRouter()
 
+  if (router.pathname === "/login" || router.pathname === "/register") {
+    return <Box></Box>
+  }
   return (
     <div style={{ marginTop: "70px" }}>
       <Container position="fixed" bottom="0" px="0">

@@ -33,5 +33,4 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
 
         });
     }
-    return res.json({ message: "something went wrong", code: 500 })
 }
