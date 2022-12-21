@@ -8,10 +8,11 @@ import {
   RadioGroup,
   Select,
   Stack,
+  useToast,
 } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import Loading from "../components/Loading"
 import apiRoutes from "../utilities/apiRoutes"
 
@@ -20,6 +21,8 @@ export default function Submit() {
   const router = useRouter()
   const [categories, setCategories] = useState<any>()
   const [isLoading, setIsloading] = useState(true)
+  const toast = useToast()
+  const toastIdRef = useRef<any>()
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -66,7 +69,18 @@ export default function Submit() {
       })
         .then((res) => res.json())
         .then((data) => {
-          router.push("/")
+          if (data._id) {
+            toastIdRef.current = toast({
+              description: "Question submited succesfully",
+              duration: 1000,
+            })
+            router.push("/")
+          } else {
+            toastIdRef.current = toast({
+              description: "Something wrong, Can't submit quesiton",
+              duration: 1000,
+            })
+          }
         })
     }
   }

@@ -61,12 +61,13 @@ export default function Quez() {
       fetch(uri)
         .then((response) => response.json())
         .then((data) => {
-          setQUestion_set(data)
-          console.table(data)
-          setTitle(data[0].title)
-          setOptions(data[0].options)
-          setcorrectAnswerIndex(data[0].correctAnswerIndex)
           setIsloading(false)
+          if (data.length > 0) {
+            setQUestion_set(data)
+            setTitle(data[0].title)
+            setOptions(data[0].options)
+            setcorrectAnswerIndex(data[0].correctAnswerIndex)
+          }
         })
     }
   }, [category])

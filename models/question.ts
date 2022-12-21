@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 
 const questionSchema = new mongoose.Schema({
-    title: { type: String, required: true, unique: true },
+    title: { type: String, required: true },
     options: { type: Array, required: true },
     category: { type: String, required: true },
     correctAnswerIndex: { type: Number, required: true },

@@ -74,10 +74,15 @@ export default function Questions() {
             (ques: any) => ques._id !== quesion._id
           )
           setQuestions(newQuestions)
-          toastIdRef.current = toast({ description: "Approved succesfully" })
+          toastIdRef.current = toast({
+            description: "Approved succesfully",
+            duration: 1000,
+          })
         } else {
           toastIdRef.current = toast({
             description: "Something wrong, can't approve",
+            duration: 1000,
+
           })
         }
       })
@@ -90,10 +95,14 @@ export default function Questions() {
         if (data?.status) {
           const newQuestions = questions.filter((ques: any) => ques._id !== id)
           setQuestions(newQuestions)
-          toastIdRef.current = toast({ description: "Deleted succesfully" })
+          toastIdRef.current = toast({
+            description: "Deleted succesfully",
+            duration: 1000,
+          })
         } else {
           toastIdRef.current = toast({
             description: "Something wrong, Can't delete",
+            duration: 1000,
           })
         }
       })
