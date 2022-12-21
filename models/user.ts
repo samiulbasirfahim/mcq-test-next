@@ -14,6 +14,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        enum: ["admin", "user"],
+        default: "user"
+    },
     totalSubmitedQuestion: {
         type: Number,
         default: 0,

@@ -6,5 +6,6 @@ const createQuestion = baseApi + "/question/create"
 const getQuestion = baseApi + "/question/get"
 const createUser = baseApi + "/user/create"
 const loginUser = baseApi + "/user/login"
-
-export default { getCategory, getQuestion, createQuestion, createUser, loginUser }
+const deleteQuestion = baseApi + "/question/delete"
+const editQuestion = baseApi + "/question/edit"
+export default { getCategory, getQuestion, createQuestion, createUser, loginUser, deleteQuestion, editQuestion }

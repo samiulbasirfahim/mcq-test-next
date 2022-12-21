@@ -14,7 +14,7 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
     }
     if (passIsHashed) {
         if (user.password === password) {
-            res.json({ ...user, status: true })
+            res.json({ status: true, user })
         } else {
             res.json({ message: "Password incorrect", code: 404 })
         }

@@ -5,5 +5,4 @@ export default function randomNumber(limit: number) {
     } else {
         randomNumber(limit)
     }
-
 }

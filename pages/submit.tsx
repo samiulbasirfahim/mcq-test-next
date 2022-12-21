@@ -23,7 +23,8 @@ export default function Submit() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
+    const userFromLocal: any = localStorage.getItem("user")
+    const user = JSON.parse(userFromLocal)
     const question = {
       title: e.target.title.value,
       option1: e.target.option1.value,
@@ -34,6 +35,7 @@ export default function Submit() {
       category: e.target.category.value,
     }
     if (
+      user._id &&
       question.title &&
       question.option1 &&
       question.option2 &&
@@ -52,9 +54,8 @@ export default function Submit() {
         ],
         category: question.category,
         correctAnswerIndex: value,
+        addedBy: user._id,
       }
-
-      console.table(finalQuestion)
 
       fetch(apiRoutes.createQuestion, {
         method: "POST",
@@ -64,7 +65,9 @@ export default function Submit() {
         body: JSON.stringify(finalQuestion),
       })
         .then((res) => res.json())
-        .then((data) => router.push("/"))
+        .then((data) => {
+          router.push("/")
+        })
     }
   }
 
@@ -140,7 +143,7 @@ export default function Submit() {
             </Stack>
           </RadioGroup>
         </Box>
-        <FormLabel>Country</FormLabel>
+        <FormLabel>Category</FormLabel>
         <Select placeholder="Select category" name="category" required={true}>
           {categories.map((category: any) => {
             return <option key={category.title}>{category.title}</option>

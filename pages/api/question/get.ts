@@ -7,6 +7,8 @@ export default async function get(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()
     const category = req?.query?.category
     const condition = req?.query?.condition
+    console.log(condition)
+    console.log(category)
     Question.count({ category: category, condition: condition }, async function (err, count: number) {
         if (!err) {
             if (count > 0) {
@@ -17,7 +19,7 @@ export default async function get(req: NextApiRequest, res: NextApiResponse) {
                     if (questionIndex.indexOf(number) === -1) {
                         questionIndex.push(number)
                         console.log(number)
-                        const question = await Question.find({ category: category, condition: condition }).skip(number as number).limit(1)
+                        const question = await Question.find({ category: category, condition: condition }).skip(number as number).limit(1).populate("addedBy")
                         questions.push(question[0])
                     } else {
                         continue
@@ -25,7 +27,7 @@ export default async function get(req: NextApiRequest, res: NextApiResponse) {
                 }
                 res.json(questions)
             } else {
-                res.json({ status: false, message: "No data found" })
+                res.json({ status: false, message: "No question found" })
             }
         }
 
