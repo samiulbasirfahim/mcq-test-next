@@ -14,7 +14,6 @@ import {
   ReactFragment,
   ReactPortal,
 } from "react"
-import Buttonc from "./Button"
 
 export default function Quez({
   question,
