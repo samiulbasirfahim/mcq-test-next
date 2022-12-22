@@ -1,5 +1,5 @@
-// let baseApi = "https://quez.vercel.app/api";
-let baseApi = "http://localhost:3000/api";
+let baseApi = "https://quez.vercel.app/api";
+// let baseApi = "http://localhost:3000/api";
 
 const getCategory = baseApi + "/category/get"
 const createQuestion = baseApi + "/question/create"
