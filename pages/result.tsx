@@ -14,8 +14,9 @@ import { useRouter } from "next/router"
 
 export default function Result() {
   const router = useRouter()
-  const { totalCorrect, totalQuestion, category }: any = router.query
-  const percentage = (totalCorrect / totalQuestion) * 100
+  const { totalCorrect, totalQuestion, category, percentage }: any =
+    router.query
+
   return (
     <Flex
       px="4"

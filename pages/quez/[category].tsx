@@ -5,6 +5,7 @@ import { useEffect, useState } from "react"
 import Loading from "../../components/Loading"
 import Quez_component from "../../components/Quez"
 import apiRoutes from "../../utilities/apiRoutes"
+import submitResult from "../../utilities/submitResult"
 
 export default function Quez() {
   const [question_set, setQUestion_set] = useState<any>()
@@ -17,7 +18,9 @@ export default function Quez() {
   const [options, setOptions] = useState<[string] | undefined | any>()
   const [isLoading, setIsloading] = useState(true)
   const router = useRouter()
-  const category = router.query.category
+  const category = router.query.category as string
+  const userFromLocal: any = localStorage.getItem("user")
+  const { _id } = JSON.parse(userFromLocal)
 
   function checkAnswer(index: number) {
     if (index === correctAnswerIndex) {
@@ -44,12 +47,15 @@ export default function Quez() {
       setCorrect(undefined)
       setProgress((newQuestionIndex / question_set.length) * 100)
     } else {
+      const percentage = (totalCorrect / question_set.length) * 100
+      submitResult(question_set.length, totalCorrect, category, _id, percentage)
       router.push({
         pathname: "/result",
         query: {
           category: category,
           totalCorrect: totalCorrect,
           totalQuestion: question_set.length,
+          percentage,
         },
       })
     }

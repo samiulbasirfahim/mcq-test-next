@@ -34,6 +34,10 @@ const userSchema = new mongoose.Schema({
     point: {
         type: Number,
         default: 50
+    },
+    history: {
+        type: Array,
+        default: [{}]
     }
 })
 
