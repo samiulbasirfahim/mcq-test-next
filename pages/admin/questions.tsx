@@ -43,7 +43,6 @@ export default function Questions() {
       .then((response) => response.json())
       .then((data) => {
         setIsLoading(false)
-        console.log(data)
         if (data?.status === false) {
           setQuestions([])
           setError(data.message)

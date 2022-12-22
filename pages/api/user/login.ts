@@ -20,7 +20,6 @@ export default async function login(req: NextApiRequest, res: NextApiResponse) {
         }
     } else {
         bcrypt.compare(password, user.password, function (err, result) {
-            console.log(password, user.password)
             if (err) {
                 return res.json({ message: "something went wrong", code: 500 })
             } else {

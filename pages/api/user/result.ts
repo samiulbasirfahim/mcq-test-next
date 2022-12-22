@@ -18,7 +18,6 @@ export default async function create(
         percantage: body.totalCorrected / body.totalQuestion * 100
     }
     oldUser.history = [quezInfo, ...oldUser?.history]
-    console.log(oldUser)
     User.findByIdAndUpdate(id, oldUser, function (err: any, data: any) {
         if (err) {
             res.json({ message: "something went wrong", status: false })

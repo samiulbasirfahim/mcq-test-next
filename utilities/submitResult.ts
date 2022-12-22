@@ -26,5 +26,5 @@ export default function submitResult(
         }),
     })
         .then((respone) => respone.json())
-        .then((data) => console.log(data))
+        .then((data) => { })
 }

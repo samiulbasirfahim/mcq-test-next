@@ -38,8 +38,7 @@ export default function Dashboard() {
   const toast = useToast()
   const toastIdRef = useRef<any>()
 
-
-  function goQuez () {
+  function goQuez() {
     router.push("/quez")
   }
 
@@ -50,7 +49,6 @@ export default function Dashboard() {
         setIsLoading(false)
         if (!data.status) {
           setUser(data)
-          console.log(data)
         } else {
           toastIdRef.current = toast({
             description: "Something wrong, Can't load user data",
@@ -122,8 +120,14 @@ export default function Dashboard() {
               <Text mb="2">History</Text>
               {!user.history[0].category ? (
                 <>
-                  <Text>You didn't complete any quez</Text>
-                  <Button onClick={goQuez} bg="secondary" size="md" p="2" my="2">
+                  <Text>You didn&apos;t complete any quez</Text>
+                  <Button
+                    onClick={goQuez}
+                    bg="secondary"
+                    size="md"
+                    p="2"
+                    my="2"
+                  >
                     <Text>
                       Start quez {"     "}
                       <ArrowForwardIcon />
@@ -149,10 +153,11 @@ export default function Dashboard() {
                   <Divider mt="0" />
                   <Stack divider={<StackDivider />}>
                     {user.history &&
-                      user.history.map((history: any) => {
+                      user.history.map((history: any, index: number) => {
                         if (history.category) {
                           return (
                             <RowTable
+                              key={index}
                               property={history?.category}
                               value={history?.percantage}
                             />

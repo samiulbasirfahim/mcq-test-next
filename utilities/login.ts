@@ -21,7 +21,6 @@ export default function login(user: any, setIsLoading: any, router: any) {
         if (data.status) {
             const path: string = router.pathname as string
             if (path.includes("/admin")) {
-                console.log(data)
                 if (data?.user?.role !== "admin") {
                     router.push("/")
                 }
