@@ -14,12 +14,10 @@ export default async function create(
         oldUser.totalCorrectedQuestion + body.totalCorrected
     oldUser.point = oldUser.point + body.point
     const quezInfo = {
-        totalQUestion: body.totalQuestion,
-        totalCorrected: body.totalCorrected,
         category: body.category,
+        percantage: body.totalCorrected / body.totalQuestion * 100
     }
-    oldUser.history = [...oldUser?.history, quezInfo]
-    // const history = oldUser.history
+    oldUser.history = [quezInfo, ...oldUser?.history]
     console.log(oldUser)
     User.findByIdAndUpdate(id, oldUser, function (err: any, data: any) {
         if (err) {

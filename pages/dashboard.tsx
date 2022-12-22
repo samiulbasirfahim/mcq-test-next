@@ -1,4 +1,9 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons"
+import {
+  ArrowForwardIcon,
+  ArrowLeftIcon,
+  ViewIcon,
+  ViewOffIcon,
+} from "@chakra-ui/icons"
 import {
   Box,
   Button,
@@ -9,6 +14,7 @@ import {
   Heading,
   Stack,
   StackDivider,
+  TagLeftIcon,
   Text,
   useDisclosure,
   useToast,
@@ -31,6 +37,11 @@ export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
   const toast = useToast()
   const toastIdRef = useRef<any>()
+
+
+  function goQuez () {
+    router.push("/quez")
+  }
 
   useEffect(() => {
     fetch(`${apiRoutes.getUser}?id=${_id}`)
@@ -106,32 +117,53 @@ export default function Dashboard() {
               </Grid>
             </Collapse>
           </Box>
-
-          <Box border="2px" borderColor="secondary" rounded="md" p="2">
-            <Text mb="2">History</Text>
-            <Grid
-              bg="gray.00"
-              rounded="sm"
-              p="2"
-              templateColumns={"repeat(2, 1fr)"}
-              gap={4}
-            >
-              <Text fontSize="14" color="white">
-                Category
-              </Text>
-              <Text fontSize="14" color="white">
-                Percantage
-              </Text>
-            </Grid>
-            <Divider mt="0" />
-            <Stack divider={<StackDivider />}>
-              <RowTable property={"fahim"} value={"25.7"} />
-              <RowTable property={"fahim"} value={"32"} />
-              <RowTable property={"fahim"} value={"76"} />
-              <RowTable property={"fahim"} value={"98"} />
-              <RowTable property={"fahim"} value={"34"} />
-            </Stack>
-          </Box>
+          {user.history && (
+            <Box border="2px" borderColor="secondary" rounded="md" p="2">
+              <Text mb="2">History</Text>
+              {!user.history[0].category ? (
+                <>
+                  <Text>You didn't complete any quez</Text>
+                  <Button onClick={goQuez} bg="secondary" size="md" p="2" my="2">
+                    <Text>
+                      Start quez {"     "}
+                      <ArrowForwardIcon />
+                    </Text>
+                  </Button>
+                </>
+              ) : (
+                <>
+                  <Grid
+                    bg="gray.00"
+                    rounded="sm"
+                    p="2"
+                    templateColumns={"repeat(2, 1fr)"}
+                    gap={4}
+                  >
+                    <Text fontSize="14" color="white">
+                      Category
+                    </Text>
+                    <Text fontSize="14" color="white">
+                      Percantage
+                    </Text>
+                  </Grid>
+                  <Divider mt="0" />
+                  <Stack divider={<StackDivider />}>
+                    {user.history &&
+                      user.history.map((history: any) => {
+                        if (history.category) {
+                          return (
+                            <RowTable
+                              property={history?.category}
+                              value={history?.percantage}
+                            />
+                          )
+                        }
+                      })}
+                  </Stack>
+                </>
+              )}
+            </Box>
+          )}
         </Box>
       </Box>
     )

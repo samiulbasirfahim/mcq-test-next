@@ -50,7 +50,7 @@ export default function Result() {
                 Total: {totalQuestion}{" "}
               </Text>
               <Text color="secondary" py="0">
-                Correct: {totalQuestion}{" "}
+                Correct: {totalCorrect}{" "}
               </Text>
             </Alert>
           </Center>
