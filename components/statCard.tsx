@@ -14,12 +14,10 @@ export default function StatCard({ property, value }: any) {
         <Heading textAlign="center" fontFamily="operator mono" size="sm">
           {property}
         </Heading>
-      </CardHeader>
-      <CardFooter mt="0" display="flex" justifyContent="center">
-        <Center>
+        <Center mt="2">
           <Text textAlign="center">{value}</Text>
         </Center>
-      </CardFooter>
+      </CardHeader>
     </Card>
   )
 }
