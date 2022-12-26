@@ -1,6 +1,6 @@
 import apiRoutes from "./apiRoutes";
 
-export default function login(user: any, setIsLoading: any, router: any) {
+export default async function login(user: any, setIsLoading: any, router: any) {
     if (!user) {
         setIsLoading(false)
         return router.push("/login")
@@ -16,8 +16,7 @@ export default function login(user: any, setIsLoading: any, router: any) {
             isHashed: true
 
         }),
-    }).then(res => res.json()).then(data => {
-        setIsLoading(false)
+    }).then(res => res.json()).then(function (data) {
         if (data.status) {
             const path: string = router.pathname as string
             if (path.includes("/admin")) {
@@ -27,11 +26,13 @@ export default function login(user: any, setIsLoading: any, router: any) {
             }
             if (router.pathname === "/login" || router.pathname === "/register") {
                 router.push("/")
+
             }
         } else {
             localStorage.removeItem("user")
             router.push('/login')
         }
+        setIsLoading(false)
     })
 
 }

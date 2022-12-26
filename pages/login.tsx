@@ -15,12 +15,14 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import HeadingC from "../components/Heading"
+import Loading from "../components/Loading"
 import apiRoutes from "../utilities/apiRoutes"
 
 export default function Login() {
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
   function showPassFunc() {
     setShowPass(!showPass)
   }
@@ -32,6 +34,7 @@ export default function Login() {
       password: e.target.password.value,
     }
     if (loginInfo.email && loginInfo.password) {
+      setIsLoading(true)
       fetch(apiRoutes.loginUser, {
         method: "POST",
         headers: {
@@ -44,17 +47,21 @@ export default function Login() {
           if (!data.status) {
             if (data.message) {
               setError(data.message)
+              setIsLoading(false)
             }
           } else if (data.status) {
             const stringifyUser = JSON.stringify(data.user)
             localStorage.setItem("user", stringifyUser)
             router.push("/")
+            setIsLoading(false)
           }
         })
     }
   }
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Flex
       px="4"
       py="8"

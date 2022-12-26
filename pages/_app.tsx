@@ -1,5 +1,11 @@
 import "../styles/global.css"
-import { ChakraProvider, Container } from "@chakra-ui/react"
+import {
+  ChakraProvider,
+  ColorModeScript,
+  Container,
+  extendTheme,
+  ThemeConfig,
+} from "@chakra-ui/react"
 import type { AppProps } from "next/app"
 import Navbar from "../components/Navbar"
 import { newTheme } from "../styles/theme"
@@ -9,6 +15,11 @@ import { useRouter } from "next/router"
 import Loading from "../components/Loading"
 
 export default function App({ Component, pageProps }: AppProps) {
+  const config: ThemeConfig = {
+    initialColorMode: "light",
+    useSystemColorMode: false,
+  }
+  const theme = extendTheme({ config })
   const [isLoading, setIsLoading] = useState(true)
   const router = useRouter()
   useEffect(() => {
@@ -22,6 +33,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <Loading />
   ) : (
     <ChakraProvider theme={newTheme}>
+      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
       <Container margin="auto" padding="0" h="100vh">
         <Component {...pageProps} />
         <Navbar />

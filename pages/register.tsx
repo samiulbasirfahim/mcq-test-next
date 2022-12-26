@@ -15,12 +15,14 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { useState } from "react"
 import HeadingC from "../components/Heading"
+import Loading from "../components/Loading"
 import apiRoutes from "../utilities/apiRoutes"
 
 export default function Register() {
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  const [isLoading, setIsLoading] = useState(false)
   function removeError() {
     setError("")
   }
@@ -41,6 +43,7 @@ export default function Register() {
       registerInfo.password &&
       registerInfo.confirmPassword
     ) {
+      setIsLoading(true)
       fetch(`${apiRoutes.createUser}`, {
         method: "POST",
         headers: {
@@ -56,11 +59,13 @@ export default function Register() {
         .then((data) => {
           if (data.code === 11000) {
             setError("Email must be unique")
-            return e.target.reset()
+            e.target.reset()
+            return setIsLoading(false)
           }
           if (!data?.code) {
             localStorage.setItem("user", JSON.stringify(data))
             router.push("/")
+            setIsLoading(false)
           }
         })
     }
@@ -68,8 +73,9 @@ export default function Register() {
   function showPassFunc() {
     setShowPass(!showPass)
   }
-
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <Flex
       px="4"
       py="8"

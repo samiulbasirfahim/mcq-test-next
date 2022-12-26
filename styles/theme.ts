@@ -1,8 +1,6 @@
 import { extendTheme } from "@chakra-ui/react";
 
 export const newTheme = extendTheme({
-    initialColorMode: "dark",
-    useSystemColorMode: false,
     cssVarPrefix: "coffeeclass-io",
     colors: {
         primary: "#845ec2",

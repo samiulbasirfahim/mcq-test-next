@@ -23,7 +23,7 @@ export default function Navbar() {
     return <Box></Box>
   }
   return (
-    <div style={{ marginTop: "70px" }}>
+    <div style={{ marginTop: "10vh" }}>
       <Container position="fixed" bottom="0" px="0">
         <Flex p={4} bg="secondary" m="0">
           <Center>
