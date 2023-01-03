@@ -65,6 +65,7 @@ export default function Categories() {
       <Grid gap="5" templateColumns="repeat(1, 1fr)">
         {categories.map((category: any) => (
           <Text
+            key={category._id}
             bg="secondary"
             p="2"
             rounded="md"
@@ -98,11 +99,11 @@ export default function Categories() {
                 </Text>
               )}
               <InputGroup mb="2">
-                <InputLeftAddon children="title" />
+                <InputLeftAddon>Title</InputLeftAddon>
                 <Input name="title" type="text" placeholder="title" />
               </InputGroup>
               <InputGroup>
-                <InputLeftAddon children="image" />
+                <InputLeftAddon>Image</InputLeftAddon>
                 <Input name="image_url" type="text" placeholder="Image url" />
               </InputGroup>
               {isOpen && (
