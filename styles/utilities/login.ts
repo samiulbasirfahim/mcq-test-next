@@ -1,6 +1,6 @@
 import apiRoutes from "./apiRoutes";
 
-export default async function login(user: any, setIsLoading: any, router: any) {
+export default async function login(user: any, setIsLoading: any, router: any, setIsAdmin: any) {
     if (!user) {
         setIsLoading(false)
         return router.push("/login")
@@ -26,7 +26,11 @@ export default async function login(user: any, setIsLoading: any, router: any) {
             }
             if (router.pathname === "/login" || router.pathname === "/register") {
                 router.push("/")
-
+            }
+            if (data?.user?.role === "admin") {
+                setIsAdmin(true)
+            } else {
+                setIsAdmin(false)
             }
         } else {
             localStorage.removeItem("user")

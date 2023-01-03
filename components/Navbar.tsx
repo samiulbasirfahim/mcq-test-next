@@ -8,24 +8,25 @@ import {
   Button,
   Container,
   Box,
+  useColorMode,
 } from "@chakra-ui/react"
 import { useRouter } from "next/router"
 
-export default function Navbar() {
+export default function Navbar({ isAdmin }: any) {
   const iconProp = {
     width: 20,
     height: 20,
   }
-
+  console.log(isAdmin)
   const router = useRouter()
-
+  const { colorMode, toggleColorMode } = useColorMode()
   if (router.pathname === "/login" || router.pathname === "/register") {
     return <Box></Box>
   }
   return (
     <div style={{ marginTop: "10vh" }}>
       <Container position="fixed" bottom="0" px="0">
-        <Flex p={4} bg="secondary" m="0">
+        <Flex p={4} bg={colorMode === "light" ? "gray.100" : "secondary"} m="0">
           <Center>
             <Button onClick={() => router.push("/")}>
               <Image
@@ -58,6 +59,21 @@ export default function Navbar() {
               />
             </Button>
           </Center>
+          {isAdmin && (
+            <>
+              <Spacer />
+              <Center>
+                <Button onClick={() => router.push("/admin")}>
+                  <Image
+                    src="/icons/admin.png"
+                    alt="admin"
+                    width={iconProp.width + 4}
+                    height={iconProp.height + 4}
+                  />
+                </Button>
+              </Center>
+            </>
+          )}
           <Spacer />
           <Center>
             <Button onClick={() => router.push("/settings")}>

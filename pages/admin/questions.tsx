@@ -8,14 +8,12 @@ import {
   Select,
   Stack,
   Text,
-  Toast,
-  useRadio,
   useToast,
 } from "@chakra-ui/react"
 import { useEffect, useRef, useState } from "react"
 import Loading from "../../components/Loading"
 import Question from "../../components/question"
-import apiRoutes from "../../utilities/apiRoutes"
+import apiRoutes from "../../styles/utilities/apiRoutes"
 
 export default function Questions() {
   const [questions, setQuestions] = useState<any>()

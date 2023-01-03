@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { Question } from "../../../models/question"
-import { connectMongoose } from "../../../utilities/mongooseConnect"
-import randomNumber from "../../../utilities/randomNumber"
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect"
+import randomNumber from "../../../styles/utilities/randomNumber"
 
 export default async function get(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()

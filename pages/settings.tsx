@@ -1,4 +1,4 @@
-import { Box, Button, useColorMode } from "@chakra-ui/react"
+import { Box, Button, Grid, useColorMode } from "@chakra-ui/react"
 import Head from "next/head"
 import { useRouter } from "next/router"
 
@@ -14,10 +14,12 @@ export default function Settings() {
       <Head>
         <title>Settings</title>
       </Head>
-      <Button onClick={toggleColorMode}>
-        Toggle {colorMode === "light" ? "Dark" : "Light"}
-      </Button>
-      <Button onClick={logOut}>Log out</Button>
+      <Grid gap="5" templateColumns="repeat(1, 1fr)" px="4" py="8">
+        <Button onClick={toggleColorMode}>
+          {colorMode === "light" ? "Dark" : "Light"} Mode
+        </Button>
+        <Button onClick={logOut}>Log out</Button>
+      </Grid>
     </Box>
   )
 }

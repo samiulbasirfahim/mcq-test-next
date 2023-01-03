@@ -25,7 +25,7 @@ import { useEffect, useRef, useState } from "react"
 import Loading from "../components/Loading"
 import RowTable from "../components/rowTable"
 import StatCard from "../components/statCard"
-import apiRoutes from "../utilities/apiRoutes"
+import apiRoutes from "../styles/utilities/apiRoutes"
 
 export default function Dashboard() {
   const { isOpen, onToggle } = useDisclosure()

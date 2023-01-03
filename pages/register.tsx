@@ -16,9 +16,9 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import HeadingC from "../components/Heading"
 import Loading from "../components/Loading"
-import apiRoutes from "../utilities/apiRoutes"
+import apiRoutes from "../styles/utilities/apiRoutes"
 
-export default function Register() {
+export default function Register({ setIsAdmin }: any) {
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
@@ -65,6 +65,11 @@ export default function Register() {
           if (!data?.code) {
             localStorage.setItem("user", JSON.stringify(data))
             router.push("/")
+            if (data?.user?.role === "admin") {
+              setIsAdmin(true)
+            } else {
+              setIsAdmin(false)
+            }
             setIsLoading(false)
           }
         })

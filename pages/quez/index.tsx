@@ -4,7 +4,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import HeadingC from "../../components/Heading"
 import Loading from "../../components/Loading"
-import apiRoutes from "../../utilities/apiRoutes"
+import apiRoutes from "../../styles/utilities/apiRoutes"
 
 export default function Categories() {
   const router = useRouter()

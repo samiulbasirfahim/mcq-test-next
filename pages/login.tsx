@@ -16,9 +16,9 @@ import { useRouter } from "next/router"
 import { useState } from "react"
 import HeadingC from "../components/Heading"
 import Loading from "../components/Loading"
-import apiRoutes from "../utilities/apiRoutes"
+import apiRoutes from "../styles/utilities/apiRoutes"
 
-export default function Login() {
+export default function Login({ setIsAdmin }: any) {
   const [showPass, setShowPass] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
@@ -53,6 +53,11 @@ export default function Login() {
             const stringifyUser = JSON.stringify(data.user)
             localStorage.setItem("user", stringifyUser)
             router.push("/")
+            if (data?.user?.role === "admin") {
+              setIsAdmin(true)
+            } else {
+              setIsAdmin(false)
+            }
             setIsLoading(false)
           }
         })

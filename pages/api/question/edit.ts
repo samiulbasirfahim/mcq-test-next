@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Question } from "../../../models/question";
-import { connectMongoose } from "../../../utilities/mongooseConnect";
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect";
 
 export default async function edit(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()

@@ -1,10 +1,16 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { Category } from "../../../models/category"
-import { connectMongoose } from "../../../utilities/mongooseConnect"
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect"
 
 export default async function create(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()
     const body = req.body
-    const category = await Category.create(body)
-    res.json(category)
+    await Category.create(body, function (err: any, data: any) {
+        if (err) {
+            res.json({ message: "Error creating category", status: false })
+        } else if (data) {
+            res.json(data)
+        }
+    })
+
 }

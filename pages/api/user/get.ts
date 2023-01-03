@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../../../models/user";
-import { connectMongoose } from "../../../utilities/mongooseConnect";
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect";
 
 export default async function create(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()

@@ -4,8 +4,8 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import Loading from "../../components/Loading"
 import Quez_component from "../../components/Quez"
-import apiRoutes from "../../utilities/apiRoutes"
-import submitResult from "../../utilities/submitResult"
+import apiRoutes from "../../styles/utilities/apiRoutes"
+import submitResult from "../../styles/utilities/submitResult"
 
 export default function Quez() {
   const [question_set, setQUestion_set] = useState<any>()

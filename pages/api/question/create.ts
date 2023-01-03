@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { Question } from "../../../models/question"
 import { User } from "../../../models/user"
-import { connectMongoose } from "../../../utilities/mongooseConnect"
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect"
 
 export default async function create(
     req: NextApiRequest,

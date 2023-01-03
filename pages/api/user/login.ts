@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { User } from "../../../models/user";
 import bcrypt from "bcrypt"
-import { connectMongoose } from "../../../utilities/mongooseConnect";
+import { connectMongoose } from "../../../styles/utilities/mongooseConnect";
 
 export default async function login(req: NextApiRequest, res: NextApiResponse) {
     await connectMongoose()

@@ -14,7 +14,7 @@ import Head from "next/head"
 import { useRouter } from "next/router"
 import { useEffect, useRef, useState } from "react"
 import Loading from "../components/Loading"
-import apiRoutes from "../utilities/apiRoutes"
+import apiRoutes from "../styles/utilities/apiRoutes"
 
 export default function Submit() {
   const [value, setValue] = useState("")
